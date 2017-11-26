@@ -1,14 +1,10 @@
 package gui;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
-
-import generator.Expression;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
@@ -17,6 +13,7 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTextArea;
 import java.awt.SystemColor;
+import generator.Expression;
 
 public class GUI {
 
@@ -62,13 +59,16 @@ public class GUI {
 		frmLogicExpressions.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JTextArea textArea = new JTextArea();
+		textArea.setFont(new Font("Monospaced", Font.PLAIN, 18));
 		textArea.setEditable(false);
 		
 		firstExpression = new JTextField();
+		firstExpression.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		firstExpression.setForeground(Color.BLACK);
 		firstExpression.setColumns(10);
 		
 		firstNumOfVariable = new JTextField();
+		firstNumOfVariable.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		firstNumOfVariable.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("First expression");
@@ -78,9 +78,11 @@ public class GUI {
 		lblNumberOfIp.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		secondExpression = new JTextField();
+		secondExpression.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		secondExpression.setColumns(10);
 		
 		secondNumOfVariable = new JTextField();
+		secondNumOfVariable.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		secondNumOfVariable.setColumns(10);
 		
 		JLabel lblSexongExpression = new JLabel("Second expression");
@@ -101,21 +103,21 @@ public class GUI {
 				final int variables1 = Integer.valueOf(firstNumOfVariable.getText());
 				
 				Expression x = new Expression(expression1,variables1);
-				
+			
 				final boolean[] arrX = x.generateTruthTable();
 				
-				textArea.setText("The expression : " + expression1 + "\n");
-				textArea.append("Minterms\tOutput\n");
+				textArea.setText("The expression : " + expression1 + "\n\n");
+				textArea.append("Minterms\t Output\n");
 				
 				for(int i = 0; i < arrX.length ; i++){
-					textArea.append("m" + i + "\t" + arrX[i] + "\n");
+					textArea.append("m" + i + "\t\t " + arrX[i] + "\n");
 				}
-				textArea.append("Result of testing is : ");
+				
 				if (x.isContradiction()){
-					textArea.append("Contradiction");
+					textArea.append("Result of testing is : Contradiction");
 				}
 				else if (x.isTautology()){
-					textArea.append("Tautology");
+					textArea.append("Result of testing is : Tautology");
 				}
 				
 			}
@@ -136,18 +138,18 @@ public class GUI {
 				
 				final boolean[] arrY = y.generateTruthTable();
 				
-				textArea.setText("The expression : " + expression2 + "\n");
-				textArea.append("Minterms\tOutput\n");
+				textArea.setText("The expression : " + expression2 + "\n\n");
+				textArea.append("Minterms\t Output\n");
 				
 				for(int i = 0; i < arrY.length ; i++){
-					textArea.append("m" + i + "\t" + arrY[i] + "\n");
+					textArea.append("m" + i + "\t\t " + arrY[i] + "\n");
 				}
-				textArea.append("Result of testing is : ");
+				
 				if (y.isContradiction()){
-					textArea.append("Contradiction");
+					textArea.append("Result of testing is : Contradiction");
 				}
 				else if (y.isTautology()){
-					textArea.append("Tautology");
+					textArea.append("Result of testing is : Tautology");
 				}
 			}
 		});
@@ -171,18 +173,17 @@ public class GUI {
 				final boolean[] arrX = x.generateTruthTable();
 				final boolean[] arrY = y.generateTruthTable();
 				
-				textArea.setText("Comparing : " + expression1 + expression2 + "\n");
-				textArea.append("Minterms\tFirst output\tSecond output");
+				textArea.setText("Comparing : " + expression1 +" and " + expression2 + "\n\n");
+				textArea.append("Minterms\tFirst output\tSecond output\n");
 				
 				for(int i = 0; i < arrY.length ; i++){
-					textArea.append("m" + i + "\t" + arrX[i] + "\t" + arrY[i] + "\n");
+					textArea.append("m" + i + "\t\t" + arrX[i] + "\t\t" + arrY[i] + "\n");
 				}
-				final int result = x.compareTo(y);
-				if (result == 0){
+				if (x == y){
 					textArea.append("The expressions are equivalent");
 				}
-				else if (result == 1){
-					textArea.append("The expressions aren't equivalent");
+				else {
+					textArea.append("\nThe expressions aren't equivalent");
 				}
 				
 			}
