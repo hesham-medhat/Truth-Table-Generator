@@ -44,8 +44,8 @@ public class Expression implements Comparable<Expression> {
 
 	public boolean[] generateTruthTable() {
 		if (truthTable == null) {
-			truthTable = new boolean[(int) Math.round(Math.pow(variables, 2.0))];
-			for (int i = 0; i < (int) Math.round(Math.pow(variables, 2.0)); i++) { // Try all possible input.
+			truthTable = new boolean[(int) Math.round(Math.pow(2.0, variables))];
+			for (int i = 0; i < (int) Math.round(Math.pow(2.0, variables)); i++) { // Try all possible input.
 				for (Term t : terms) {
 					if (t.evaluate(i)) {// If evaluates to for any product term.
 						truthTable[i] = true;
