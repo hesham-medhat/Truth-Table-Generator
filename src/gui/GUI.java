@@ -109,11 +109,11 @@ public class GUI {
 			
 					final boolean[] arrX = x.generateTruthTable();
 				
-					textArea.setText("The expression : " + expression1 + "\n\n");
-					textArea.append("Minterms\t Output\n");
+					textArea.setText(" The expression : " + expression1 + "\n\n");
+					textArea.append(" Minterms\t Output\n");
 				
 					for(int i = 0; i < arrX.length ; i++){
-						textArea.append("m" + i + "\t\t " + arrX[i] + "\n");
+						textArea.append(" m" + i + "\t\t " + arrX[i] + "\n");
 					}
 				
 					if (x.isContradiction()){
@@ -146,11 +146,11 @@ public class GUI {
 				
 					final boolean[] arrY = y.generateTruthTable();
 				
-					textArea.setText("The expression : " + expression2 + "\n\n");
-					textArea.append("Minterms\t Output\n");
+					textArea.setText(" The expression : " + expression2 + "\n\n");
+					textArea.append(" Minterms\t Output\n");
 				
 					for(int i = 0; i < arrY.length ; i++){
-						textArea.append("m" + i + "\t\t " + arrY[i] + "\n");
+						textArea.append(" m" + i + "\t\t " + arrY[i] + "\n");
 					}
 				
 					if (y.isContradiction()){
@@ -187,19 +187,23 @@ public class GUI {
 					final boolean[] arrX = x.generateTruthTable();
 					final boolean[] arrY = y.generateTruthTable();
 				
-					textArea.setText("Comparing : " + expression1 +" and " + expression2 + "\n\n");
-					textArea.append("Minterms\tFirst output\tSecond output\n");
+					textArea.setText(" Comparing : " + expression1 +" and " + expression2 + "\n\n");
+					textArea.append(" Minterms\tFirst output\tSecond output\n");
 				
 					for(int i = 0; i < arrY.length ; i++){
-						textArea.append("m" + i + "\t\t" + arrX[i] + "\t\t" + arrY[i] + "\n");
+						textArea.append(" m" + i + "\t\t" + arrX[i] + "\t\t" + arrY[i] + "\n");
 					}
-					if (x == y){
-						textArea.append("The expressions are equivalent");
+					boolean equi = true;
+					for (int i = 0; i < arrX.length; i++) {
+						if (arrX[i] != arrY[i]) {
+							equi = false;
+							textArea.append("\n The expressions aren't equivalent");
+							break;
+						}
 					}
-					else {
-						textArea.append("\nThe expressions aren't equivalent");
+					if(equi) {
+						textArea.append("\n The expressions are equivalent");
 					}
-				
 				}
 			}
 		});
