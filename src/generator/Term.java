@@ -71,7 +71,7 @@ public class Term {
 			sb.append('0');// Add missing leading zeroes.
 		}
 		sb.append(binaryString);
-		binaryString = sb.reverse().toString(); // Reversed here to match indexing of Rep and Comp.
+		binaryString = sb.toString(); // Reversed here to match indexing of Rep and Comp.
 		boolean[] input = new boolean[variables];
 		for (int i = 0; i < variables; i++) {
 			if (binaryString.charAt(i) == '1') {
