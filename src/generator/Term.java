@@ -41,10 +41,11 @@ public class Term {
 		for (int i = 0; i < termString.length(); i++) {
 			char c = termString.charAt(i);
 			if (c != '\'') {
-				if (varRep[c - 'A'] && varComp[c - 'A']) {// Variable already represented and complemented.
-					if (nextIsComp(i)) {
-						contradiction = false;
-					} else {
+				if (varRep[c - 'A']) {// Variable already represented.
+					if (nextIsComp(i) && !varComp[c - 'A']) {
+						contradiction = true;
+						break;
+					} else if (varComp[c - 'A'] && !nextIsComp(i)) {
 						contradiction = true;
 						break;
 					}
@@ -88,7 +89,7 @@ public class Term {
 	public boolean evaluate(int sequence) {
 		boolean[] input = makeinputRepresentation(sequence);
 		if (contradiction) {
-			return contradiction;
+			return false;
 		} else {
 			for (int i = 0; i < variables; i++) {
 				if (varRep[i]) {
