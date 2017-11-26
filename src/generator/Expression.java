@@ -34,7 +34,7 @@ public class Expression implements Comparable<Expression> {
 	 * @return list of terms generated.
 	 */
 	private List<Term> termsGenerator() {
-		String[] termsArr = expressionString.split("+");
+		String[] termsArr = expressionString.split("\\+");
 		List<Term> termsList = new LinkedList<Term>();
 		for (String i : termsArr) {
 			termsList.add(new Term(i, variables));
