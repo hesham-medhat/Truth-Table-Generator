@@ -193,7 +193,7 @@ public class GUI {
 					for(int i = 0; i < arrY.length ; i++){
 						textArea.append("m" + i + "\t\t" + arrX[i] + "\t\t" + arrY[i] + "\n");
 					}
-					if (x == y){
+					if (x.equals(y)){
 						textArea.append("The expressions are equivalent");
 					}
 					else {
