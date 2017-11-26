@@ -62,10 +62,21 @@ public class Expression implements Comparable<Expression> {
 		boolean[] otherOutput = other.generateTruthTable();
 		for (int i = 0; i < otherOutput.length; i++) {
 			if (otherOutput[i] != truthTable[i]) {
-				return -1;
+				return other.hashCode() - this.hashCode();
 			}
 		}
 		return 0;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		boolean[] otherOutput = ((Expression) other).generateTruthTable();
+		for (int i = 0; i < otherOutput.length; i++) {
+			if (otherOutput[i] != truthTable[i]) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
