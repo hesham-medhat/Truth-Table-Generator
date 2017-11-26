@@ -10,7 +10,7 @@ import java.util.*;
  * @author H
  *
  */
-public class Expression {
+public class Expression implements Comparable<Expression> {
 
 	private List<Term> terms;
 	public int variables;
@@ -26,6 +26,7 @@ public class Expression {
 		this.expressionString = expressionString.trim();
 		this.variables = variables; //Must be before terms generation.
 		this.terms = termsGenerator();
+		this.truthTable = generateTruthTable();
 	}
 
 	/**
@@ -54,6 +55,17 @@ public class Expression {
 			}
 		}
 		return truthTable;
+	}
+
+	@Override
+	public int compareTo(Expression other) {
+		boolean[] otherOutput = other.generateTruthTable();
+		for (int i = 0; i < otherOutput.length; i++) {
+			if (otherOutput[i] != truthTable[i]) {
+				return -1;
+			}
+		}
+		return 0;
 	}
 
 }
