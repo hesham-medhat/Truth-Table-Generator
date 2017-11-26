@@ -68,4 +68,28 @@ public class Expression implements Comparable<Expression> {
 		return 0;
 	}
 
+	/**
+	 * @return true if the expression is a tautology.
+	 */
+	public boolean isTautology() {
+		for (boolean output : this.generateTruthTable()) {
+			if (!output) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * @return true if the expression is a contradiction.
+	 */
+	public boolean isContradiction() {
+		for (boolean output : this.generateTruthTable()) {
+			if (output) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 }
