@@ -1,0 +1,104 @@
+/**
+ * Package for generating truth tables.
+ */
+package generator;
+
+/**
+ * @author H
+ *
+ */
+public class Term {
+
+	public String termString;
+	public int variables;
+	private boolean[] varRep;
+	private boolean[] varComp;
+	public boolean contradiction;
+
+	public Term (final String expression, final int variables) {
+		contradiction = false;
+		this.termString = expression.trim();
+		this.variables = variables;
+		varRep = new boolean[variables];
+		varComp = new boolean[variables];
+		analyzeTerm();
+	}
+
+	/**
+	 * Determines if the next character in termString is a complement '.
+	 * @param iterator current position.
+	 * @return true if next character in sequence is complement.
+	 */
+	private boolean nextIsComp(final int iterator) {
+		return iterator < termString.length() - 1 && termString.charAt(iterator + 1) == '\'';
+	}
+
+	/**
+	 * Analyzes the term.
+	 * This method builds the varRep and varComp.
+	 */
+	private void analyzeTerm() {
+		for (int i = 0; i < termString.length(); i++) {
+			char c = termString.charAt(i);
+			if (c != '\'') {
+				if (varRep[c - 'A'] && varComp[c - 'A']) {// Variable already represented and complemented.
+					if (nextIsComp(i)) {
+						contradiction = false;
+					} else {
+						contradiction = true;
+						break;
+					}
+				}
+				varRep[c - 'A'] = true;// Variable denoted by this character is represented.
+				if (nextIsComp(i)) {
+					varComp[c - 'A'] = true;// Variable denoted by this character is complemented.
+				}
+			}
+		}
+	}
+
+	/**
+	 * Represents the input sequence as boolean array.
+	 * @param sequence as decimal integer.
+	 * @return boolean array representation of presence of variables as
+	 * 0's (false) or 1's (true).
+	 */
+	private boolean[] makeinputRepresentation(int sequence) {
+		String binaryString = Integer.toBinaryString(sequence);
+		StringBuilder sb = new StringBuilder();
+		for (int j = 0; j < variables - binaryString.length(); j++) {
+			sb.append('0');// Add missing leading zeroes.
+		}
+		sb.append(binaryString);
+		binaryString = sb.reverse().toString(); // Reversed here to match indexing of Rep and Comp.
+		boolean[] input = new boolean[variables];
+		for (int i = 0; i < variables; i++) {
+			if (binaryString.charAt(i) == '1') {
+				input[i] = true;
+			}
+		}
+		return input;
+	}
+
+	/**
+	 * Evaluates an expression as true or false for given input sequence.
+	 * @param sequence
+	 * @return
+	 */
+	public boolean evaluate(int sequence) {
+		boolean[] input = makeinputRepresentation(sequence);
+		if (contradiction) {
+			return contradiction;
+		} else {
+			for (int i = 0; i < variables; i++) {
+				if (varRep[i]) {
+					if (input[i] != !varComp[i]) {
+						return false;
+					}
+				}
+			}
+			return true;
+		}
+	}
+
+}
