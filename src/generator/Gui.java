@@ -108,7 +108,7 @@ public class Gui {
 				final int variables1 = Integer.valueOf(firstNumOfVariable.getText());
 				
 				Expression x = new Expression(expression1,variables1);
-				
+			
 				final boolean[] arrX = x.generateTruthTable();
 				
 				textArea.setText("The expression : " + expression1 + "\n\n");
