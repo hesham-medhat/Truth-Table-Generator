@@ -99,27 +99,31 @@ public class GUI {
 				
 				textArea.setText("");
 				
-				final String expression1 = firstExpression.getText();
-				final int variables1 = Integer.valueOf(firstNumOfVariable.getText());
-				
-				Expression x = new Expression(expression1,variables1);
+				if(firstExpression.getText().isEmpty() || firstNumOfVariable.getText().isEmpty()) {
+					textArea.setText("Invalid inputs");
+				}
+				else{
+					final String expression1 = firstExpression.getText();
+					final int variables1 = Integer.valueOf(firstNumOfVariable.getText());
+					Expression x = new Expression(expression1,variables1);
 			
-				final boolean[] arrX = x.generateTruthTable();
+					final boolean[] arrX = x.generateTruthTable();
 				
-				textArea.setText("The expression : " + expression1 + "\n\n");
-				textArea.append("Minterms\t Output\n");
+					textArea.setText("The expression : " + expression1 + "\n\n");
+					textArea.append("Minterms\t Output\n");
 				
-				for(int i = 0; i < arrX.length ; i++){
-					textArea.append("m" + i + "\t\t " + arrX[i] + "\n");
-				}
+					for(int i = 0; i < arrX.length ; i++){
+						textArea.append("m" + i + "\t\t " + arrX[i] + "\n");
+					}
 				
-				if (x.isContradiction()){
-					textArea.append("Result of testing is : Contradiction");
-				}
-				else if (x.isTautology()){
-					textArea.append("Result of testing is : Tautology");
-				}
+					if (x.isContradiction()){
+						textArea.append("Result of testing is : Contradiction");
+					}
+					else if (x.isTautology()){
+						textArea.append("Result of testing is : Tautology");
+					}
 				
+					}
 			}
 		});
 		
@@ -131,25 +135,30 @@ public class GUI {
 				
 				textArea.setText("");
 				
-				final String expression2 = secondExpression.getText();
-				final int variables2 = Integer.valueOf(secondNumOfVariable.getText());
-				
-				Expression y = new Expression(expression2,variables2);
-				
-				final boolean[] arrY = y.generateTruthTable();
-				
-				textArea.setText("The expression : " + expression2 + "\n\n");
-				textArea.append("Minterms\t Output\n");
-				
-				for(int i = 0; i < arrY.length ; i++){
-					textArea.append("m" + i + "\t\t " + arrY[i] + "\n");
+				if(secondExpression.getText().isEmpty() || secondNumOfVariable.getText().isEmpty()) {
+					textArea.setText("Invalid inputs");
 				}
+				else{
+
+					final String expression2 = secondExpression.getText();
+					final int variables2 = Integer.valueOf(secondNumOfVariable.getText());
+					Expression y = new Expression(expression2,variables2);
 				
-				if (y.isContradiction()){
-					textArea.append("Result of testing is : Contradiction");
-				}
-				else if (y.isTautology()){
-					textArea.append("Result of testing is : Tautology");
+					final boolean[] arrY = y.generateTruthTable();
+				
+					textArea.setText("The expression : " + expression2 + "\n\n");
+					textArea.append("Minterms\t Output\n");
+				
+					for(int i = 0; i < arrY.length ; i++){
+						textArea.append("m" + i + "\t\t " + arrY[i] + "\n");
+					}
+				
+					if (y.isContradiction()){
+						textArea.append("Result of testing is : Contradiction");
+					}
+					else if (y.isTautology()){
+						textArea.append("Result of testing is : Tautology");
+					}
 				}
 			}
 		});
@@ -162,30 +171,36 @@ public class GUI {
 				
 				textArea.setText("");
 				
-				final String expression1 = firstExpression.getText();
-				final String expression2 = secondExpression.getText();
-				final int variables1 = Integer.valueOf(firstNumOfVariable.getText());
-				final int variables2 = Integer.valueOf(secondNumOfVariable.getText());
-				
-				Expression x = new Expression(expression1,variables1);
-				Expression y = new Expression(expression2,variables2);
-				
-				final boolean[] arrX = x.generateTruthTable();
-				final boolean[] arrY = y.generateTruthTable();
-				
-				textArea.setText("Comparing : " + expression1 +" and " + expression2 + "\n\n");
-				textArea.append("Minterms\tFirst output\tSecond output\n");
-				
-				for(int i = 0; i < arrY.length ; i++){
-					textArea.append("m" + i + "\t\t" + arrX[i] + "\t\t" + arrY[i] + "\n");
-				}
-				if (x == y){
-					textArea.append("The expressions are equivalent");
+				if(secondExpression.getText().isEmpty() || secondNumOfVariable.getText().isEmpty() ||
+						firstExpression.getText().isEmpty() || firstNumOfVariable.getText().isEmpty()){
+					textArea.setText("Invalid inputs");
 				}
 				else {
-					textArea.append("\nThe expressions aren't equivalent");
-				}
+
+					final String expression1 = firstExpression.getText();
+					final String expression2 = secondExpression.getText();
+					final int variables1 = Integer.valueOf(firstNumOfVariable.getText());
+					final int variables2 = Integer.valueOf(secondNumOfVariable.getText());
+					Expression x = new Expression(expression1,variables1);
+					Expression y = new Expression(expression2,variables2);
 				
+					final boolean[] arrX = x.generateTruthTable();
+					final boolean[] arrY = y.generateTruthTable();
+				
+					textArea.setText("Comparing : " + expression1 +" and " + expression2 + "\n\n");
+					textArea.append("Minterms\tFirst output\tSecond output\n");
+				
+					for(int i = 0; i < arrY.length ; i++){
+						textArea.append("m" + i + "\t\t" + arrX[i] + "\t\t" + arrY[i] + "\n");
+					}
+					if (x == y){
+						textArea.append("The expressions are equivalent");
+					}
+					else {
+						textArea.append("\nThe expressions aren't equivalent");
+					}
+				
+				}
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(frmLogicExpressions.getContentPane());
