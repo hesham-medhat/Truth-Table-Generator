@@ -191,7 +191,8 @@ public class GUI {
 				textArea.setText("");
 				
 				if(secondExpression.getText().isEmpty() || secondNumOfVariable.getText().isEmpty() ||
-						firstExpression.getText().isEmpty() || firstNumOfVariable.getText().isEmpty()){
+						firstExpression.getText().isEmpty() || firstNumOfVariable.getText().isEmpty() || 
+						firstNumOfVariable.getText() != secondNumOfVariable.getText()){
 					textArea.setText("Invalid inputs\n");
 				}
 				else {
